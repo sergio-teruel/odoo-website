@@ -1,0 +1,69 @@
+version: "2.1"
+services:
+    odoo:
+        extends:
+            file: common.yaml
+            service: odoo
+        build:
+            args:
+                ADMIN_PASSWORD: "$ODOO_ADMIN_PASSWORD"
+                PROXY_MODE: "$ODOO_PROXY_MODE"
+        restart: unless-stopped
+        depends_on:
+            - db
+            - smtp
+            - inbox
+
+    db:
+        extends:
+            file: common.yaml
+            service: db
+        restart: unless-stopped
+
+    proxy:
+        extends:
+            file: common.yaml
+            service: proxy
+        restart: unless-stopped
+        networks:
+            default:
+            inverseproxy_shared:
+        environment:
+            FORCEHOST: $DOMAIN_PROD
+        labels:
+            traefik.frontend.rule: "Host:${DOMAIN_PROD}"
+
+    inbox:
+        extends:
+            file: common.yaml
+            service: inboxreal
+        restart: unless-stopped
+
+    smtp:
+        extends:
+            file: common.yaml
+            service: smtpreal
+        restart: unless-stopped
+
+    backup:
+        extends:
+            file: common.yaml
+            service: backup
+        restart: unless-stopped
+        depends_on:
+            - db
+            - smtp
+
+networks:
+    default:
+        driver_opts:
+            encrypted: 1
+
+    inverseproxy_shared:
+        external: true
+
+volumes:
+    # XXX Odoo volume names must match $ODOO_MAJOR for quick branch switching
+    filestore10:
+    db10:
+    smtp:

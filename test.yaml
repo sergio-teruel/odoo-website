@@ -1,0 +1,55 @@
+version: "2.1"
+services:
+    odoo:
+        extends:
+            file: common.yaml
+            service: odoo
+        build:
+            args:
+                PGDATABASE: test
+                # You may want demo data for testing
+                WITHOUT_DEMO: "false"
+        depends_on:
+            - db
+            - smtp
+            - inbox
+
+    db:
+        extends:
+            file: common.yaml
+            service: db
+
+    proxy:
+        extends:
+            file: common.yaml
+            service: proxy
+        networks:
+            default:
+            inverseproxy_shared:
+        environment:
+            FORCEHOST: $DOMAIN_TEST
+        labels:
+            traefik.frontend.rule: "Host:${DOMAIN_TEST}"
+
+    inbox:
+        extends:
+            file: common.yaml
+            service: inboxfake
+
+    smtp:
+        extends:
+            file: common.yaml
+            service: smtpfake
+
+networks:
+    default:
+        driver_opts:
+            encrypted: 1
+
+    inverseproxy_shared:
+        external: true
+
+volumes:
+    # XXX Odoo volume names must match $ODOO_MAJOR for quick branch switching
+    filestore10:
+    db10:

@@ -1,0 +1,57 @@
+version: "2.1"
+
+services:
+    odoo:
+        extends:
+            file: common.yaml
+            service: odoo
+        build:
+            args:
+                PGDATABASE: devel
+                # To aggregate in development, use `setup-devel.yaml`
+                AGGREGATE: "false"
+                # No need for this in development
+                PYTHONOPTIMIZE: 0
+                PIP_INSTALL_ODOO: "false"
+                CLEAN: "false"
+                COMPILE: "false"
+                # You want demo data for development
+                WITHOUT_DEMO: "false"
+        ports:
+            - "127.0.0.1:${ODOO_MAJOR}069:8069"
+            - "127.0.0.1:${ODOO_MAJOR}072:8072"
+            - "127.0.0.1:6899:6899"
+        volumes:
+            - ./odoo/custom:/opt/odoo/custom:ro,z
+        depends_on:
+            - db
+            - smtp
+            - inbox
+            - wdb
+        # XXX Odoo v8 has no `--dev` mode; Odoo v9 has no `all` parameter
+        command: odoo --workers 0 --dev all
+
+    db:
+        extends:
+            file: common.yaml
+            service: db
+
+    inbox:
+        extends:
+            file: common.yaml
+            service: inboxfake
+
+    smtp:
+        extends:
+            file: common.yaml
+            service: smtpfake
+
+    wdb:
+        image: yajo/wdb-server
+        ports:
+            - "127.0.0.1:1984:1984"
+
+volumes:
+    # XXX Odoo volume names must match $ODOO_MAJOR for quick branch switching
+    filestore10:
+    db10:
