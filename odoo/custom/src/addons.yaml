@@ -1,0 +1,42 @@
+# Base
+web:
+    - web_dialog_size
+    - web_environment_ribbon
+    - web_export_view
+    - web_favicon
+    - web_m2x_options
+    - web_no_bubble
+    - web_responsive
+    - web_searchbar_full_width
+    - web_sheet_full_width
+    - web_tree_many2one_clickable
+server-tools:
+    - base_technical_features
+    - auth_signup_verify_email
+    - base_multi_image
+    - base_custom_info
+    - date_range
+    - auth_supplier
+    - base_suspend_security
+
+---
+# Spanish Localization
+account-financial-reporting:
+    - account_tax_balance
+    - account_financial_report_qweb
+account-financial-tools:
+    - account_fiscal_year
+l10n-spain:
+    - account_balance_reporting
+    - l10n_es
+    - l10n_es_account_balance_report
+    - l10n_es_account_bank_statement_import_n43
+    - l10n_es_account_invoice_sequence
+    - l10n_es_partner
+    - l10n_es_toponyms
+    - pyment_redsys
+partner-contact:
+    - base_location
+    - base_location_geonames_import
+reporting-engine:
+    - report_xlsx
