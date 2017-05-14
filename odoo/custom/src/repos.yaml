@@ -23,7 +23,7 @@
     target: oca $ODOO_VERSION
     merges:
         - oca $ODOO_VERSION
-        - tecnativa 10.0-PR-payment_redsys
+        - tecnativa 10.0-mig-payment_redsys
 
 ./sale-workflow:
     defaults:
