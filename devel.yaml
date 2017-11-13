@@ -29,7 +29,7 @@ services:
             - inbox
             - wdb
         # XXX Odoo v8 has no `--dev` mode; Odoo v9 has no `all` parameter
-        command: odoo --workers 0 --dev all
+        command: odoo --workers 0 --dev
 
     db:
         extends:
@@ -53,5 +53,5 @@ services:
 
 volumes:
     # XXX Odoo volume names must match $ODOO_MAJOR for quick branch switching
-    filestore10:
-    db10:
+    filestore9:
+    db9:
