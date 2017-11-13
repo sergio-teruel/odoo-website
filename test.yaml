@@ -51,5 +51,5 @@ networks:
 
 volumes:
     # XXX Odoo volume names must match $ODOO_MAJOR for quick branch switching
-    filestore10:
-    db10:
+    filestore:
+    db:
