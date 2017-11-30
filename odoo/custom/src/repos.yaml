@@ -16,14 +16,13 @@
 
 ./l10n-spain:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/l10n-spain.git
-        tecnativa: https://github.com/Tecnativa/l10n-spain
     target: oca $ODOO_VERSION
     merges:
         - oca $ODOO_VERSION
-        - tecnativa 10.0-mig-payment_redsys
+        - oca refs/pull/504/head # payment_redsys
 
 ./sale-workflow:
     defaults:
