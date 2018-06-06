@@ -1,4 +1,5 @@
 # Ignore all src directories except private and files with a dot
+odoo/auto
 odoo/custom/src/*
 !odoo/custom/src/private
 !odoo/custom/src/*.*
@@ -12,3 +13,6 @@ docker-compose.yml
 **.py[co]
 **.egg-info
 **.orig
+
+# Editor garbage folders
+.vscode

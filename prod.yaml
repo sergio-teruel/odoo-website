@@ -4,39 +4,37 @@ services:
         extends:
             file: common.yaml
             service: odoo
-        build:
-            args:
-                ADMIN_PASSWORD: "$ODOO_ADMIN_PASSWORD"
-                PROXY_MODE: "$ODOO_PROXY_MODE"
         restart: unless-stopped
         depends_on:
             - db
             - smtp
-            - inbox
+        networks:
+            default:
+            inverseproxy_shared:
+        labels:
+            traefik.dbmanager.frontend.auth.basic:
+                "${DB_USER}:${ODOO_ADMIN_PASSWORD_BCRYPT}"
+            traefik.dbmanager.frontend.rule:
+                "Host:${DOMAIN_PROD};PathPrefix:/web/database/"
+            traefik.dbselector.frontend.rule:
+                "Host:${DOMAIN_PROD};PathPrefix:/web/database/{p:selector|list}"
+            traefik.longpolling.frontend.rule:
+                "Host:${DOMAIN_PROD};PathPrefix:/longpolling/"
+            traefik.websiteinfo.frontend.auth.basic:
+                "${DB_USER}:${ODOO_ADMIN_PASSWORD_BCRYPT}"
+            traefik.websiteinfo.frontend.rule:
+                "Host:${DOMAIN_PROD};Path:/website/info"
+            traefik.www.frontend.rule: "Host:${DOMAIN_PROD}"
+            traefik.alt.frontend.rule: "Host:${DOMAIN_PROD_ALT}"
+            traefik.alt.frontend.redirect.regex:
+                "^(.*)://${DOMAIN_PROD_ALT}/(.*)$$"
+            traefik.alt.frontend.redirect.replacement:
+                "$$1://${DOMAIN_PROD}/$$2"
 
     db:
         extends:
             file: common.yaml
             service: db
-        restart: unless-stopped
-
-    proxy:
-        extends:
-            file: common.yaml
-            service: proxy
-        restart: unless-stopped
-        networks:
-            default:
-            inverseproxy_shared:
-        environment:
-            FORCEHOST: $DOMAIN_PROD
-        labels:
-            traefik.frontend.rule: "Host:${DOMAIN_PROD}"
-
-    inbox:
-        extends:
-            file: common.yaml
-            service: inboxreal
         restart: unless-stopped
 
     smtp:
@@ -63,7 +61,6 @@ networks:
         external: true
 
 volumes:
-    # XXX Odoo volume names must match $ODOO_MAJOR for quick branch switching
     filestore:
     db:
     smtp:
