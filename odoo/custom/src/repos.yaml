@@ -16,12 +16,239 @@
         # Example of a merge of the PR with the number <PR>
         # - oca refs/pull/<PR>/head
 
-# Example of an OCA repository
-./l10n-spain:
+# Odoo is always required
+./odoo:
+    defaults:
+        # Shallow repositories ($DEPTH_DEFAULT=1) are faster & thinner
+        # You may need a bigger depth when merging PRs (use $DEPTH_MERGE
+        # for a sane value of 100 commits)
+        depth: $DEPTH_DEFAULT
+    remotes:
+        ocb: https://github.com/OCA/OCB.git
+        odoo: https://github.com/odoo/odoo.git
+        openupgrade: https://github.com/OCA/OpenUpgrade.git
+    target:
+        ocb $ODOO_VERSION
+    merges:
+        - ocb $ODOO_VERSION
+        # Example of a merge of the PR with the number <PR>
+        # - oca refs/pull/<PR>/head
+
+
+./account-invoicing:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
+        oca: https://github.com/OCA/account-invoicing.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+        - oca refs/pull/283/head # purchase_stock_picking_return_invoicing
+
+./account-financial-reporting:
     defaults:
         depth: $DEPTH_DEFAULT
     remotes:
+        oca: https://github.com/OCA/account-financial-reporting.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./account-financial-tools:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/account-financial-tools.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./account-payment:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
+        oca: https://github.com/OCA/account-payment.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+        - oca refs/pull/189/head # account_check_printing_report_base -due date imp
+
+./bank-payment:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
+        oca: https://github.com/OCA/bank-payment.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+        - oca refs/pull/352/head # account_payment_purchase
+
+# Example of an OCA repository
+./l10n-spain:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
         oca: https://github.com/OCA/l10n-spain.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+        - oca refs/pull/789/head # l10n_es_mis_report_trial_balance
+        - oca refs/pull/855/head # l10n_es_aeat_sii_cash_basis
+
+./mis-builder:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/mis-builder.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./partner-contact:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/partner-contact.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./pos:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
+        oca: https://github.com/OCA/pos.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+        - oca refs/pull/257/head # pos_stock_picking_invoice_link
+        - oca refs/pull/261/head # imp pos_lot_selection
+        - oca refs/pull/269/head # pos_order_return
+
+./product-variant:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/product-variant.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./purchase-workflow:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
+        oca: https://github.com/OCA/purchase-workflow.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+        - oca refs/pull/501/head # 10.0-purchase_discount-round_globally
+
+./queue:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/queue.git
+    target: oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./reporting-engine:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/reporting-engine.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./report-print-send:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/report-print-send.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./sale-workflow:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/sale-workflow.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./server-tools:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/server-tools.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./stock-logistics-warehouse:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/stock-logistics-warehouse.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./stock-logistics-workflow:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/stock-logistics-workflow.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./stock-logistics-reporting:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/stock-logistics-reporting.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./web:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/web.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./website:
+    defaults:
+        depth: $DEPTH_DEFAULT
+    remotes:
+        oca: https://github.com/OCA/website.git
     target:
         oca $ODOO_VERSION
     merges:
