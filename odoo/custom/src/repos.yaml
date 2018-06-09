@@ -1,10 +1,10 @@
 # Odoo is always required
 ./odoo:
     defaults:
-        # Shallow repositories ($DEPTH_DEFAULT=1) are faster & thinner
+        # Shallow repositories ($DEPTH_MERGE=1) are faster & thinner
         # You may need a bigger depth when merging PRs (use $DEPTH_MERGE
         # for a sane value of 100 commits)
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         ocb: https://github.com/OCA/OCB.git
         odoo: https://github.com/odoo/odoo.git
@@ -15,25 +15,6 @@
         - ocb $ODOO_VERSION
         # Example of a merge of the PR with the number <PR>
         # - oca refs/pull/<PR>/head
-
-# Odoo is always required
-./odoo:
-    defaults:
-        # Shallow repositories ($DEPTH_DEFAULT=1) are faster & thinner
-        # You may need a bigger depth when merging PRs (use $DEPTH_MERGE
-        # for a sane value of 100 commits)
-        depth: $DEPTH_DEFAULT
-    remotes:
-        ocb: https://github.com/OCA/OCB.git
-        odoo: https://github.com/odoo/odoo.git
-        openupgrade: https://github.com/OCA/OpenUpgrade.git
-    target:
-        ocb $ODOO_VERSION
-    merges:
-        - ocb $ODOO_VERSION
-        # Example of a merge of the PR with the number <PR>
-        # - oca refs/pull/<PR>/head
-
 
 ./account-invoicing:
     defaults:
@@ -48,7 +29,7 @@
 
 ./account-financial-reporting:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/account-financial-reporting.git
     target:
@@ -58,7 +39,7 @@
 
 ./account-financial-tools:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/account-financial-tools.git
     target:
@@ -86,7 +67,16 @@
         oca $ODOO_VERSION
     merges:
         - oca $ODOO_VERSION
-        - oca refs/pull/352/head # account_payment_purchase
+
+./e-commerce:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
+        oca: https://github.com/OCA/e-commerce.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
 
 # Example of an OCA repository
 ./l10n-spain:
@@ -103,7 +93,7 @@
 
 ./mis-builder:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/mis-builder.git
     target:
@@ -113,9 +103,19 @@
 
 ./partner-contact:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/partner-contact.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
+./connector:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
+        oca: https://github.com/OCA/connector.git
     target:
         oca $ODOO_VERSION
     merges:
@@ -136,7 +136,7 @@
 
 ./product-variant:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/product-variant.git
     target:
@@ -157,7 +157,7 @@
 
 ./queue:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/queue.git
     target: oca $ODOO_VERSION
@@ -166,7 +166,7 @@
 
 ./reporting-engine:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/reporting-engine.git
     target:
@@ -176,7 +176,7 @@
 
 ./report-print-send:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/report-print-send.git
     target:
@@ -186,7 +186,7 @@
 
 ./sale-workflow:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/sale-workflow.git
     target:
@@ -196,7 +196,7 @@
 
 ./server-tools:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/server-tools.git
     target:
@@ -204,9 +204,19 @@
     merges:
         - oca $ODOO_VERSION
 
+./stock-logistics-barcode:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
+        oca: https://github.com/OCA/stock-logistics-barcode.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+
 ./stock-logistics-warehouse:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/stock-logistics-warehouse.git
     target:
@@ -216,7 +226,7 @@
 
 ./stock-logistics-workflow:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/stock-logistics-workflow.git
     target:
@@ -226,7 +236,7 @@
 
 ./stock-logistics-reporting:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/stock-logistics-reporting.git
     target:
@@ -236,7 +246,7 @@
 
 ./web:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/web.git
     target:
@@ -246,7 +256,7 @@
 
 ./website:
     defaults:
-        depth: $DEPTH_DEFAULT
+        depth: $DEPTH_MERGE
     remotes:
         oca: https://github.com/OCA/website.git
     target:
