@@ -56,7 +56,6 @@
         oca $ODOO_VERSION
     merges:
         - oca $ODOO_VERSION
-        - oca refs/pull/189/head # account_check_printing_report_base -due date imp
 
 ./bank-payment:
     defaults:
