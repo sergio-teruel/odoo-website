@@ -10,6 +10,11 @@ web:
     - web_searchbar_full_width
     - web_sheet_full_width
     - web_tree_many2one_clickable
+server-backend:
+    - base_external_dbsource
+    - base_external_dbsource_sqlite
+    - base_external_dbsource_mssql
+    - base_external_dbsource_mysql
 server-tools:
     - base_technical_features
     - auth_signup_verify_email

@@ -196,6 +196,20 @@
     merges:
         - oca $ODOO_VERSION
 
+./server-backend:
+    defaults:
+        depth: $DEPTH_MERGE
+    remotes:
+        oca: https://github.com/OCA/server-backend.git
+    target:
+        oca $ODOO_VERSION
+    merges:
+        - oca $ODOO_VERSION
+        - oca refs/pull/6/head
+        - oca refs/pull/7/head
+        - oca refs/pull/8/head
+        - oca refs/pull/9/head
+
 ./stock-logistics-barcode:
     defaults:
         depth: $DEPTH_MERGE
